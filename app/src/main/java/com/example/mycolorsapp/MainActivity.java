@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private SeekBar sbrBlue = null;
     private SeekBar sbrAlpha = null;
     private View vieColors = null;
+
+    private Toolbar toolbar= null;
 
 
 
@@ -36,9 +40,29 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         sbrRed.setOnSeekBarChangeListener(this);
         sbrAlpha .setOnSeekBarChangeListener(this);
 
+
+
         registerForContextMenu(vieColors);
 
         registerForContextMenu(vieColors);
+
+
+        //toolbar= findViewById(R.id.toolbarSeekbar);
+        //setActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menubar, menu);
+        inflater.inflate(R.menu.colors1, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switchecase(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -49,46 +73,52 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        //return super.onContextItemSelected(item);
-        switch (item.getItemId()){
-            case R.id.itemBlue:
-                cambiarColorsito(0,0,255,200,"blue");
-                return  true;
-            case R.id.itemRed:
-                cambiarColorsito(255,0,0,200,"red");
-                return  true;
-            case R.id.itemTransparent:
-                cambiarColorsito(0,0,0,0,"transparent");
-                return  true;
-            case R.id.itemSemitransparent:
-                cambiarColorsito(0,0,0,125,"semi transparent");
-                return  true;
-            case R.id.itemGreen:
-                cambiarColorsito(35,150,35,200,"green");
-                return  true;
-            case R.id.itemBrown:
-                cambiarColorsito(99,63,33,200,"brown");
-                return  true;
-            case R.id.itemBlack:
-                cambiarColorsito(0,0,0,200,"black");
-                return  true;
-            case R.id.itemPink:
-                cambiarColorsito(200,50,130,200,"pink");
-                return  true;
-            case R.id.itemPurple:
-                cambiarColorsito(160,30,160,200,"purple");
-                return  true;
-            case R.id.itemWhite:
-                cambiarColorsito(255,255,255,200, "white");
-                return  true;
-            case R.id.itemGray:
-                cambiarColorsito(120,120,120,200,"gray");
-                return  true;
-                default:
-                    return super.onContextItemSelected(item);
-        }
+        //
+        switchecase(item);
+        return super.onContextItemSelected(item);
     }
-
+public boolean switchecase(MenuItem item){
+    switch (item.getItemId()){
+        case R.id.itemBlue:
+            cambiarColorsito(0,0,255,200,"blue");
+            return  true;
+        case R.id.itemRed:
+            cambiarColorsito(255,0,0,200,"red");
+            return  true;
+        case R.id.itemTransparent:
+            cambiarColorsito(0,0,0,0,"transparent");
+            return  true;
+        case R.id.itemSemitransparent:
+            cambiarColorsito(0,0,0,125,"semi transparent");
+            return  true;
+        case R.id.itemGreen:
+            cambiarColorsito(35,150,35,200,"green");
+            return  true;
+        case R.id.itemBrown:
+            cambiarColorsito(99,63,33,200,"brown");
+            return  true;
+        case R.id.itemBlack:
+            cambiarColorsito(0,0,0,200,"black");
+            return  true;
+        case R.id.itemPink:
+            cambiarColorsito(200,50,130,200,"pink");
+            return  true;
+        case R.id.itemPurple:
+            cambiarColorsito(160,30,160,200,"purple");
+            return  true;
+        case R.id.itemWhite:
+            cambiarColorsito(255,255,255,200, "white");
+            return  true;
+        case R.id.itemGray:
+            cambiarColorsito(120,120,120,200,"gray");
+            return  true;
+        case R.id.restoreColors:
+            cambiarColorsito(0,0,0,0,"null");
+            return true;
+        default:
+            return super.onContextItemSelected(item);
+    }
+}
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean v) {
 
@@ -129,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         sbrBlue= findViewById(R.id.sbrBlue);
         sbrAlpha= findViewById(R.id.sbrAlpha);
         vieColors= findViewById(R.id.vieColors);
+
     }
 
 }
