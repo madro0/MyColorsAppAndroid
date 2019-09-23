@@ -126,7 +126,7 @@
             android:layout_height="match_parent"
             android:background="@mipmap/user"
             >
-            >
+
 
             <View
                 android:id="@+id/vieColors"
